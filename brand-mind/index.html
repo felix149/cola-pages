@@ -1496,35 +1496,21 @@ async function submitToFeishu(archetypeName) {
     scores: state.scores
   };
   
-  // 方法1: sendBeacon（微信兼容性最好）
+  // 方法1: 图片 beacon（微信最兼容，不受 CORS 限制）
   try {
-    const blob = new Blob([JSON.stringify(payload)], {type: 'application/json'});
-    const sent = navigator.sendBeacon(WORKER_URL, blob);
-    if (sent) { console.log('[FEISHU] Beacon sent'); return; }
-  } catch(e) {}
-  
-  // 方法2: fetch
-  try {
-    const resp = await fetch(WORKER_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload)
-    });
-    const result = await resp.json();
-    console.log('[FEISHU] Record saved:', result.success ? 'SUCCESS' : result.msg);
-  } catch (err) {
-    console.warn('[FEISHU] fetch failed, trying XHR...', err.message);
-    // 方法3: XMLHttpRequest（某些旧版微信浏览器支持这个但不支持 fetch）
-    try {
-      const xhr = new XMLHttpRequest();
-      xhr.open('POST', WORKER_URL, true);
-      xhr.setRequestHeader('Content-Type', 'application/json');
-      xhr.send(JSON.stringify(payload));
-      console.log('[FEISHU] XHR sent');
-    } catch(e2) {
-      console.warn('[FEISHU] All methods failed');
-    }
+    const img = new Image();
+    const encoded = encodeURIComponent(JSON.stringify(payload));
+    img.src = WORKER_URL + '?d=' + encoded;
+    console.log('[FEISHU] Image beacon sent');
+  } catch(e) {
+    console.warn('[FEISHU] Image beacon failed:', e.message);
   }
+  
+  // 方法2: sendBeacon 作为备份
+  try {
+    const blob = new Blob([JSON.stringify(payload)], {type: 'text/plain'});
+    navigator.sendBeacon(WORKER_URL, blob);
+  } catch(e) {}
 }
 
 // ===== INIT =====
