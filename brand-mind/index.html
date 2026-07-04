@@ -360,21 +360,7 @@ h3 { font-size: 1.1rem; color: #E8E0D8; margin-bottom: 12px; }
 }
 .share-toast.show { opacity: 1; }
 
-/* ===== RESULT QR ===== */
-.result-qr-area {
-  margin-top: 30px; text-align: center;
-  padding-top: 20px; border-top: 1px solid #222;
-}
-.result-qr {
-  width: 100px; height: 100px;
-  border-radius: 4px;
-  background: #fff; padding: 4px;
-}
-.result-qr-hint {
-  font-size: 0.65rem; color: #555;
-  margin-top: 8px; letter-spacing: 0.1em;
-  font-family: "Courier New", monospace;
-}
+
 
 /* ===== DEEPER SCREEN ===== */
 #deeper-screen {
@@ -515,10 +501,6 @@ h3 { font-size: 1.1rem; color: #E8E0D8; margin-bottom: 12px; }
       <div class="result-name" id="result-name"></div>
       <div class="result-tagline" id="result-tagline"></div>
       <div id="result-body"></div>
-      <div class="result-qr-area">
-        <img src="./img/qrcode-wechat.png" class="result-qr" alt="QR">
-        <div class="result-qr-hint">扫码测试你的品牌心智原型</div>
-      </div>
     </div>
     <div class="share-area">
       <button class="btn btn-sm" onclick="shareResult()">测试结果分享</button>
@@ -1372,34 +1354,93 @@ function showResult() {
 }
 
 function shareResult() {
-  const card = document.getElementById('result-card');
-  // 使用 html2canvas 截图
-  if (typeof html2canvas === 'undefined') {
-    // 动态加载 html2canvas
-    const script = document.createElement('script');
-    script.src = 'https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js';
-    script.onload = () => captureAndShare(card);
-    document.head.appendChild(script);
-  } else {
-    captureAndShare(card);
+  const archetypeName = resolveArchetype();
+  const arch = archetypes[archetypeName];
+  const img = document.getElementById('result-img');
+  
+  // 手机屏幕比例的 Canvas (9:16)
+  const W = 750, H = 1334;
+  const canvas = document.createElement('canvas');
+  canvas.width = W; canvas.height = H;
+  const ctx = canvas.getContext('2d');
+  
+  // 黑色背景
+  ctx.fillStyle = '#000';
+  ctx.fillRect(0, 0, W, H);
+  
+  // 绘制头像（居中）
+  const portraitSize = 280;
+  const px = (W - portraitSize) / 2;
+  const py = 80;
+  try {
+    ctx.drawImage(img, px, py, portraitSize, portraitSize);
+  } catch(e) {}
+  
+  // 档案编号
+  ctx.fillStyle = '#555';
+  ctx.font = '20px "Courier New", monospace';
+  ctx.textAlign = 'center';
+  ctx.fillText('─── 档案编号 ' + arch.id + ' ───', W/2, py + portraitSize + 50);
+  
+  // 原型名称
+  ctx.fillStyle = '#FF0000';
+  ctx.font = 'bold 42px "Noto Serif SC", serif';
+  ctx.fillText('「' + archetypeName + '」', W/2, py + portraitSize + 110);
+  
+  // Tagline
+  ctx.fillStyle = '#E8E0D8';
+  ctx.font = '24px "Noto Serif SC", serif';
+  ctx.fillText(arch.tagline, W/2, py + portraitSize + 160);
+  
+  // 心智地图前3条
+  ctx.textAlign = 'left';
+  ctx.fillStyle = '#aaa';
+  ctx.font = '20px "Noto Serif SC", serif';
+  const startY = py + portraitSize + 220;
+  const maxItems = Math.min(3, arch.mindMap.length);
+  for (let i = 0; i < maxItems; i++) {
+    const line = arch.mindMap[i];
+    // 截断过长文字
+    const display = line.length > 28 ? line.substring(0, 28) + '...' : line;
+    ctx.fillText('• ' + display, 60, startY + i * 40);
   }
+  
+  // 分割线
+  ctx.strokeStyle = '#333';
+  ctx.beginPath();
+  ctx.moveTo(60, H - 220);
+  ctx.lineTo(W - 60, H - 220);
+  ctx.stroke();
+  
+  // 底部提示文字
+  ctx.fillStyle = '#666';
+  ctx.font = '18px "Courier New", monospace';
+  ctx.textAlign = 'center';
+  ctx.fillText('BRAND MIND 品牌心智标本馆', W/2, H - 170);
+  ctx.fillStyle = '#555';
+  ctx.font = '16px "Courier New", monospace';
+  ctx.fillText('扫码测试你的品牌心智原型 →', W/2, H - 140);
+  
+  // 绘制网址二维码（用文字替代，待替换为真实二维码图片）
+  const qrImg = new Image();
+  qrImg.crossOrigin = 'anonymous';
+  qrImg.onload = function() {
+    const qrSize = 100;
+    ctx.drawImage(qrImg, (W - qrSize)/2, H - 120, qrSize, qrSize);
+    downloadCanvas(canvas);
+  };
+  qrImg.onerror = function() {
+    // 如果二维码加载失败，直接下载
+    downloadCanvas(canvas);
+  };
+  qrImg.src = './img/qrcode-site.png';
 }
 
-function captureAndShare(element) {
-  html2canvas(element, {
-    backgroundColor: '#000',
-    scale: 2,
-    useCORS: true
-  }).then(canvas => {
-    // 转为图片并弹出保存
-    const link = document.createElement('a');
-    link.download = 'brand-mind-result.png';
-    link.href = canvas.toDataURL('image/png');
-    link.click();
-  }).catch(err => {
-    console.warn('Screenshot failed:', err);
-    alert('截图失败，请长按屏幕截图保存');
-  });
+function downloadCanvas(canvas) {
+  const link = document.createElement('a');
+  link.download = 'brand-mind-result.png';
+  link.href = canvas.toDataURL('image/png');
+  link.click();
 }
 
 // ===== DATA SUBMISSION (直连飞书) =====
