@@ -1495,8 +1495,15 @@ async function submitToFeishu(archetypeName) {
     archetype: archetypeName,
     scores: state.scores
   };
-  console.log('[FEISHU] Submitting to Worker:', WORKER_URL, JSON.stringify(payload).substring(0,100));
   
+  // 方法1: sendBeacon（微信兼容性最好）
+  try {
+    const blob = new Blob([JSON.stringify(payload)], {type: 'application/json'});
+    const sent = navigator.sendBeacon(WORKER_URL, blob);
+    if (sent) { console.log('[FEISHU] Beacon sent'); return; }
+  } catch(e) {}
+  
+  // 方法2: fetch
   try {
     const resp = await fetch(WORKER_URL, {
       method: 'POST',
@@ -1506,13 +1513,17 @@ async function submitToFeishu(archetypeName) {
     const result = await resp.json();
     console.log('[FEISHU] Record saved:', result.success ? 'SUCCESS' : result.msg);
   } catch (err) {
-    console.warn('[FEISHU] Submit failed:', err.message);
-    // Fallback: 存到 localStorage 以防丢失
+    console.warn('[FEISHU] fetch failed, trying XHR...', err.message);
+    // 方法3: XMLHttpRequest（某些旧版微信浏览器支持这个但不支持 fetch）
     try {
-      const saved = JSON.parse(localStorage.getItem('feishu_pending') || '[]');
-      saved.push({...payload, time: Date.now()});
-      localStorage.setItem('feishu_pending', JSON.stringify(saved));
-    } catch(e) {}
+      const xhr = new XMLHttpRequest();
+      xhr.open('POST', WORKER_URL, true);
+      xhr.setRequestHeader('Content-Type', 'application/json');
+      xhr.send(JSON.stringify(payload));
+      console.log('[FEISHU] XHR sent');
+    } catch(e2) {
+      console.warn('[FEISHU] All methods failed');
+    }
   }
 }
 
