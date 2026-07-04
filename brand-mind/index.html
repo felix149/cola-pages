@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>品牌心智标本�?| BRAND MIND</title>
+<title>品牌心智标本馆 | BRAND MIND</title>
 <style>
 /* ===== RESET & BASE ===== */
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -395,9 +395,9 @@ h3 { font-size: 1.1rem; color: #E8E0D8; margin-bottom: 12px; }
   <div class="screen active" id="cover-screen">
     <img class="cover-img" src="./img/cover.jpg" alt="Brand Mind">
     <div class="cover-overlay">
-      <div class="title-cn">品牌心智标本�?/div>
-      <div class="subtitle">�?收藏的不是品牌，是创造品牌的�?�?/div>
-      <button class="btn" onclick="startTest()">�?�?/button>
+      <div class="title-cn">品牌心智标本馆</div>
+      <div class="subtitle">— 收藏的不是品牌，是创造品牌的人 —</div>
+      <button class="btn" onclick="startTest()">进 入</button>
       <div class="cover-version">Brand Mind v0.3</div>
     </div>
   </div>
@@ -405,26 +405,26 @@ h3 { font-size: 1.1rem; color: #E8E0D8; margin-bottom: 12px; }
   <!-- NAME INPUT -->
   <div class="screen" id="name-screen">
     <div class="name-input-wrap">
-      <div class="name-prompt">在进入标本馆之前<br>请留下你的名�?/div>
-      <div class="name-sub">（这将成为你的档案编号的一部分�?/div>
+      <div class="name-prompt">在进入标本馆之前<br>请留下你的名字</div>
+      <div class="name-sub">（这将成为你的档案编号的一部分）</div>
       <input type="text" id="user-name-input" class="name-input" placeholder="输入你的名字" maxlength="20" autocomplete="off">
-      <button class="btn" id="name-submit-btn" onclick="submitName()" disabled>�?�?/button>
+      <button class="btn" id="name-submit-btn" onclick="submitName()" disabled>继 续</button>
     </div>
   </div>
 
   <!-- INTRO -->
   <div class="screen" id="intro-screen">
     <div class="intro-text">
-      <p>你收到一封没有署名的邀请函�?/p>
-      <p>信上只写了一句话�?/p>
-      <div class="quote">"你的心智切片已过期，请前来更新�?</div>
-      <p>你来到一栋没有门牌的建筑。门口写着�?span class="highlight">「品牌心智标本馆�?/span></p>
-      <p>走进大门后，一位看不清面孔的馆长说�?/p>
-      <p>"欢迎回来。你上一次的标本已经模糊了。我需要你重新走一遍展厅，回答一些问题。不是为了评判你——是为了把你重新看清楚�?</p>
-      <p>"没有对错。只有你是谁�?</p>
-      <div class="quote">"准备好了吗？第一间展厅的门已经打开了�?</div>
+      <p>你收到一封没有署名的邀请函。</p>
+      <p>信上只写了一句话：</p>
+      <div class="quote">"你的心智切片已过期，请前来更新。"</div>
+      <p>你来到一栋没有门牌的建筑。门口写着：<span class="highlight">「品牌心智标本馆」</span></p>
+      <p>走进大门后，一位看不清面孔的馆长说：</p>
+      <p>"欢迎回来。你上一次的标本已经模糊了。我需要你重新走一遍展厅，回答一些问题。不是为了评判你——是为了把你重新看清楚。"</p>
+      <p>"没有对错。只有你是谁。"</p>
+      <div class="quote">"准备好了吗？第一间展厅的门已经打开了。"</div>
     </div>
-    <button class="btn" onclick="enterFirstHall()">推开�?/button>
+    <button class="btn" onclick="enterFirstHall()">推开门</button>
   </div>
 
   <!-- HALL TRANSITION -->
@@ -448,10 +448,10 @@ h3 { font-size: 1.1rem; color: #E8E0D8; margin-bottom: 12px; }
 
   <!-- CALCULATION -->
   <div class="screen" id="calc-screen">
-    <h2>展厅�?·「封存室�?/h2>
-    <div class="narrator">你的标本已经成型了�?br>让我把它封存进玻璃罩里—�?br>在那之前，最后看它一眼�?/div>
+    <h2>展厅七 ·「封存室」</h2>
+    <div class="narrator">你的标本已经成型了。<br>让我把它封存进玻璃罩里——<br>在那之前，最后看它一眼。</div>
     <div class="loading-bar"></div>
-    <div class="calc-text">正在封存你的心智切片�?/div>
+    <div class="calc-text">正在封存你的心智切片…</div>
   </div>
 
   <!-- RESULT -->
@@ -463,7 +463,7 @@ h3 { font-size: 1.1rem; color: #E8E0D8; margin-bottom: 12px; }
     <div id="result-body"></div>
     <div class="share-area">
       <button class="btn btn-sm" onclick="shareResult()">复制分享文案</button>
-      <div class="share-toast" id="share-toast">已复制到剪贴�?/div>
+      <div class="share-toast" id="share-toast">已复制到剪贴板</div>
     </div>
   </div>
 </div>
@@ -473,7 +473,7 @@ h3 { font-size: 1.1rem; color: #E8E0D8; margin-bottom: 12px; }
   <div class="data-content">
     <div class="data-icon">📊 DATA POINT</div>
     <div class="data-text" id="data-text"></div>
-    <button class="data-continue-btn" onclick="dismissDataOverlay()"> 继续 �?/button>
+    <button class="data-continue-btn" onclick="dismissDataOverlay()"> 继续 →</button>
   </div>
 </div>
 
@@ -484,9 +484,11 @@ const state = {
   currentQuestion: 0,
   currentHall: 0,
   scores: {
-    R_plus: 0, R_minus: 0, // 冒险 vs 守夜�?    S_plus: 0, S_minus: 0, // 造神 vs 造钟
+    R_plus: 0, R_minus: 0, // 冒险 vs 守夜人
+    S_plus: 0, S_minus: 0, // 造神 vs 造钟
     B_plus: 0, B_minus: 0, // 诗人 vs 棋手
-    P_plus: 0, P_minus: 0, // 手术刀 vs 播种�?    M_plus: 0, M_minus: 0  // 道场 vs 赌场
+    P_plus: 0, P_minus: 0, // 手术刀 vs 播种机
+    M_plus: 0, M_minus: 0  // 道场 vs 赌场
   },
   flags: { dreamer: 0 },
   answers: []
@@ -494,12 +496,12 @@ const state = {
 
 // ===== HALLS =====
 const halls = [
-  { name: '起源�?, number: '展厅一', narrator: '每个标本都有一个最初的裂缝。让我看看你的�?, questions: [0,1,2] },
-  { name: '造物�?, number: '展厅�?, narrator: '让我看看你的手。是拿手术刀的手，还是撒种子的手�?, questions: [3,4,5] },
-  { name: '天平�?, number: '展厅�?, narrator: '这间展厅的地板是倾斜的。每个人走进来，重心都不一样�?, questions: [6,7,8] },
-  { name: '压力�?, number: '展厅�?, narrator: '这间展厅的温度在升高。让我看看你在热量中的形状�?, questions: [9,10,11] },
-  { name: '回声�?, number: '展厅�?, narrator: '这间展厅里有回声。你说的每一句话都会反弹回来——但反弹回来的，往往不是你以为自己说的那句�?, questions: [12,13,14] },
-  { name: '终局�?, number: '展厅�?, narrator: '每一个标本，都有一个结局的形状。不是好或坏——是你愿意以什么姿势站在终点�?, questions: [15,16,17] }
+  { name: '起源室', number: '展厅一', narrator: '每个标本都有一个最初的裂缝。让我看看你的。', questions: [0,1,2] },
+  { name: '造物间', number: '展厅二', narrator: '让我看看你的手。是拿手术刀的手，还是撒种子的手。', questions: [3,4,5] },
+  { name: '天平室', number: '展厅三', narrator: '这间展厅的地板是倾斜的。每个人走进来，重心都不一样。', questions: [6,7,8] },
+  { name: '压力室', number: '展厅四', narrator: '这间展厅的温度在升高。让我看看你在热量中的形状。', questions: [9,10,11] },
+  { name: '回声室', number: '展厅五', narrator: '这间展厅里有回声。你说的每一句话都会反弹回来——但反弹回来的，往往不是你以为自己说的那句。', questions: [12,13,14] },
+  { name: '终局室', number: '展厅六', narrator: '每一个标本，都有一个结局的形状。不是好或坏——是你愿意以什么姿势站在终点。', questions: [15,16,17] }
 ];
 
 // ===== QUESTIONS =====
@@ -510,22 +512,22 @@ const questions = [
     narrator: '',
     text: '你终于决定做自己的品牌了。触发这个念头的瞬间是：',
     options: [
-      { label: 'A', text: '受够了：看到一个烂东西卖得好，我咽不下�?, scores: { R_plus: 1, B_plus: 1 } },
+      { label: 'A', text: '受够了：看到一个烂东西卖得好，我咽不下去', scores: { R_plus: 1, B_plus: 1 } },
       { label: 'B', text: '看到缝隙：我发现一个市场空白，别人没做或没做好', scores: { R_plus: 1, P_plus: 1 } },
-      { label: 'C', text: '水到渠成：做着做着，别人开始叫�?品牌"�?, scores: { R_minus: 1, S_minus: 1 } },
+      { label: 'C', text: '水到渠成：做着做着，别人开始叫我"品牌"了', scores: { R_minus: 1, S_minus: 1 } },
       { label: 'D', text: '一笔账：算过了，品牌溢价长期比流量便宜', scores: { R_minus: 1, B_minus: 1 } }
     ],
-    data: '�?CBNData 2025 统计，中国新消费品牌平均存活周期�?2.7 年，其中 63% 死于"动机不清晰导致的战略摇摆"�?
+    data: '据 CBNData 2025 统计，中国新消费品牌平均存活周期为 2.7 年，其中 63% 死于"动机不清晰导致的战略摇摆"。'
   },
   // Q2
   {
     hall: 0, type: '生活', label: '衣柜',
-    narrator: '在你说第一个字之前，你的衣服已经替你说了�?,
-    text: '你买衣服的模式更接近�?,
+    narrator: '在你说第一个字之前，你的衣服已经替你说了。',
+    text: '你买衣服的模式更接近：',
     options: [
-      { label: 'A', text: '只买经典款，一件穿很多�?, scores: { R_minus: 1, P_plus: 1 } },
-      { label: 'B', text: '什么好看买什么，不考虑搭配，穿腻就�?, scores: { R_plus: 1, P_minus: 1 } },
-      { label: 'C', text: '有自己固定的风格系统——别人一眼能认出这是�?, scores: { S_plus: 1, B_plus: 1 } },
+      { label: 'A', text: '只买经典款，一件穿很多年', scores: { R_minus: 1, P_plus: 1 } },
+      { label: 'B', text: '什么好看买什么，不考虑搭配，穿腻就换', scores: { R_plus: 1, P_minus: 1 } },
+      { label: 'C', text: '有自己固定的风格系统——别人一眼能认出这是我', scores: { S_plus: 1, B_plus: 1 } },
       { label: 'D', text: '看场合穿——见投资人穿投资人喜欢的，见艺术家穿艺术家的', scores: { S_minus: 1, B_minus: 1 } }
     ],
     data: null
@@ -534,13 +536,13 @@ const questions = [
   {
     hall: 0, type: '幻想', label: '反复的梦',
     narrator: '这间展厅里有一面镜子。看进去——你常常做的梦是什么形状？',
-    text: '你反复做同一个梦。梦里的画面最接近�?,
+    text: '你反复做同一个梦。梦里的画面最接近：',
     options: [
-      { label: 'A', text: '我站在一个巨大的空白房间里，墙上什么都没有。我要在上面画出完整的世�?, scores: { S_plus: 1, P_plus: 1 } },
-      { label: 'B', text: '我在高速公路上开车，没有尽头，但速度感让我兴�?, scores: { R_plus: 1, M_minus: 1 } },
+      { label: 'A', text: '我站在一个巨大的空白房间里，墙上什么都没有。我要在上面画出完整的世界', scores: { S_plus: 1, P_plus: 1 } },
+      { label: 'B', text: '我在高速公路上开车，没有尽头，但速度感让我兴奋', scores: { R_plus: 1, M_minus: 1 } },
       { label: 'C', text: '我在修一座钟——齿轮、指针、摆锤——每个零件都必须精确咬合', scores: { S_minus: 1, P_plus: 1 } },
       { label: 'D', text: '我在一个集市上，所有人都在交换，我在观察谁换到了最好的东西', scores: { B_minus: 1, S_minus: 1 } },
-      { label: 'E', text: '我从来不记得自己的梦 / 我不想醒�?, scores: {}, flag: 'dreamer' }
+      { label: 'E', text: '我从来不记得自己的梦 / 我不想醒来', scores: {}, flag: 'dreamer' }
     ],
     data: null
   },
@@ -548,25 +550,25 @@ const questions = [
   {
     hall: 1, type: '商业', label: '产品上线',
     narrator: '',
-    text: '你的产品/服务即将上线。距�?完美"还差 20%，但竞品下周发布。你�?,
+    text: '你的产品/服务即将上线。距离"完美"还差 20%，但竞品下周发布。你：',
     options: [
-      { label: 'A', text: '发�?0% 完成度足够学到东西了', scores: { R_plus: 1, P_minus: 1 } },
-      { label: 'B', text: '不发�?0% 的差距可能是致命�?, scores: { R_minus: 1, P_plus: 1 } },
-      { label: 'C', text: '发一�?内测�?，只给核心用户，不公开', scores: { R_minus: 1, P_plus: 1 } },
+      { label: 'A', text: '发。80% 完成度足够学到东西了', scores: { R_plus: 1, P_minus: 1 } },
+      { label: 'B', text: '不发。20% 的差距可能是致命的', scores: { R_minus: 1, P_plus: 1 } },
+      { label: 'C', text: '发一个"内测版"，只给核心用户，不公开', scores: { R_minus: 1, P_plus: 1 } },
       { label: 'D', text: '发，但不叫正式版——先抢认知，再补产品', scores: { R_plus: 1, B_minus: 1 } }
     ],
-    data: 'Dyson 的第一台吸尘器经历�?5127 次原型失败才上市。�?Instagram 上线时只�?1 个滤镜功能。两者都成了。问题不�?发不�?，是你的品牌基因适合哪种节奏�?
+    data: 'Dyson 的第一台吸尘器经历了 5127 次原型失败才上市。而 Instagram 上线时只有 1 个滤镜功能。两者都成了。问题不是"发不发"，是你的品牌基因适合哪种节奏。'
   },
   // Q5
   {
     hall: 1, type: '生活', label: '厨房',
-    narrator: '做饭和做品牌，用的是同一种直觉�?,
+    narrator: '做饭和做品牌，用的是同一种直觉。',
     text: '你今天自己做饭。冰箱里有一些食材，但不太搭。你会：',
     options: [
-      { label: 'A', text: '打开小红书搜菜谱，严格按步骤�?, scores: { P_plus: 1, R_minus: 1 } },
-      { label: 'B', text: '随便炒。能吃就行，重要的是�?, scores: { P_minus: 1, R_plus: 1 } },
-      { label: 'C', text: '挑战一下：用这�?不搭"的食材发明一道新�?, scores: { R_plus: 1, S_plus: 1 } },
-      { label: 'D', text: '不做了，点外卖。把时间留给更重要的�?, scores: { B_minus: 1, M_minus: 1 } }
+      { label: 'A', text: '打开小红书搜菜谱，严格按步骤来', scores: { P_plus: 1, R_minus: 1 } },
+      { label: 'B', text: '随便炒。能吃就行，重要的是快', scores: { P_minus: 1, R_plus: 1 } },
+      { label: 'C', text: '挑战一下：用这些"不搭"的食材发明一道新菜', scores: { R_plus: 1, S_plus: 1 } },
+      { label: 'D', text: '不做了，点外卖。把时间留给更重要的事', scores: { B_minus: 1, M_minus: 1 } }
     ],
     data: null
   },
@@ -577,9 +579,9 @@ const questions = [
     text: '给品牌起名字的时候，你的第一反应是：',
     options: [
       { label: 'A', text: '名字必须有灵魂，哪怕别人听不懂也没关系', scores: { S_plus: 1, B_plus: 1 } },
-      { label: 'B', text: '先查商标注册库，好名�?= 能保护的名字', scores: { R_minus: 1, S_minus: 1 } },
-      { label: 'C', text: '叫什么不重要，做什么才决定它是什�?, scores: { S_minus: 1, B_minus: 1 } },
-      { label: 'D', text: '先想清楚用户第一眼看到会联想到什�?, scores: { R_plus: 1, B_minus: 1 } }
+      { label: 'B', text: '先查商标注册库，好名字 = 能保护的名字', scores: { R_minus: 1, S_minus: 1 } },
+      { label: 'C', text: '叫什么不重要，做什么才决定它是什么', scores: { S_minus: 1, B_minus: 1 } },
+      { label: 'D', text: '先想清楚用户第一眼看到会联想到什么', scores: { R_plus: 1, B_minus: 1 } }
     ],
     data: null
   },
@@ -590,33 +592,33 @@ const questions = [
     text: '你拿到一台时间机器，但只能用一次。你会：',
     options: [
       { label: 'A', text: '回到 5 年前——带着现在的认知重新做选择', scores: { M_plus: 1, R_minus: 1 } },
-      { label: 'B', text: '�?10 年后——看看自己是不是赢了', scores: { M_minus: 1, R_plus: 1 } },
-      { label: 'C', text: '回到某个关键节点——改掉那个错误决�?, scores: { P_plus: 1, S_minus: 1 } },
-      { label: 'D', text: '哪儿也不去。我不需要答案，我享受不确定�?, scores: { R_plus: 1, B_plus: 1 } }
+      { label: 'B', text: '去 10 年后——看看自己是不是赢了', scores: { M_minus: 1, R_plus: 1 } },
+      { label: 'C', text: '回到某个关键节点——改掉那个错误决策', scores: { P_plus: 1, S_minus: 1 } },
+      { label: 'D', text: '哪儿也不去。我不需要答案，我享受不确定性', scores: { R_plus: 1, B_plus: 1 } }
     ],
     data: null
   },
   // Q8
   {
-    hall: 2, type: '商业', label: '投资人的�?,
+    hall: 2, type: '商业', label: '投资人的钱',
     narrator: '',
-    text: '有两个投资人同时找你。A 给钱多但要你半年内跑�?GMV 数据。B 给钱少但�?你随便做，我投人不投项目"。你选：',
+    text: '有两个投资人同时找你。A 给钱多但要你半年内跑出 GMV 数据。B 给钱少但说"你随便做，我投人不投项目"。你选：',
     options: [
-      { label: 'A', text: '�?A。钱是弹药，有钱才有试错空间', scores: { R_plus: 1, M_minus: 1 } },
-      { label: 'B', text: '�?B。不被数据绑架更重要', scores: { R_minus: 1, B_plus: 1 } },
+      { label: 'A', text: '选 A。钱是弹药，有钱才有试错空间', scores: { R_plus: 1, M_minus: 1 } },
+      { label: 'B', text: '选 B。不被数据绑架更重要', scores: { R_minus: 1, B_plus: 1 } },
       { label: 'C', text: '都不选。拿别人的钱就要听别人的', scores: { S_plus: 1, M_plus: 1 } },
-      { label: 'D', text: '�?A 的钱，但�?B 的方式花——数据可以做出来', scores: { R_plus: 1, B_minus: 1 } }
+      { label: 'D', text: '选 A 的钱，但用 B 的方式花——数据可以做出来', scores: { R_plus: 1, B_minus: 1 } }
     ],
-    data: '红杉中国 2024 年数据显示，早期品牌项目中，�?对的�?比拿"多的�?的存活率�?4.2 倍�?对的�?的定义是——投资人对品牌建设周期的预期与创始人一致�?
+    data: '红杉中国 2024 年数据显示，早期品牌项目中，拿"对的钱"比拿"多的钱"的存活率高 4.2 倍。"对的钱"的定义是——投资人对品牌建设周期的预期与创始人一致。'
   },
   // Q9
   {
     hall: 2, type: '生活', label: '书架',
-    narrator: '你保留什么书，就是你保留什么信念�?,
-    text: '如果你只能保留一类书�?,
+    narrator: '你保留什么书，就是你保留什么信念。',
+    text: '如果你只能保留一类书：',
     options: [
       { label: 'A', text: '人物传记——看别人怎么活的', scores: { S_plus: 1, M_plus: 1 } },
-      { label: 'B', text: '方法�?工具书——能直接用的东西', scores: { S_minus: 1, P_plus: 1 } },
+      { label: 'B', text: '方法论/工具书——能直接用的东西', scores: { S_minus: 1, P_plus: 1 } },
       { label: 'C', text: '小说/诗歌——感受比知识重要', scores: { B_plus: 1, S_plus: 1 } },
       { label: 'D', text: '商业/投资——赚钱是最好的修行', scores: { B_minus: 1, M_minus: 1 } }
     ],
@@ -626,25 +628,25 @@ const questions = [
   {
     hall: 3, type: '商业', label: '定价',
     narrator: '',
-    text: '一个潜在大客户说："你的东西好，但价格比同行�?40%。能不能便宜点？"',
+    text: '一个潜在大客户说："你的东西好，但价格比同行贵 40%。能不能便宜点？"',
     options: [
       { label: 'A', text: '不降。贵是品牌的一部分，降价就不是我了', scores: { S_plus: 1, B_plus: 1 } },
-      { label: 'B', text: '不降价格，但可以加服务——让他觉�?�?', scores: { P_plus: 1, B_minus: 1 } },
+      { label: 'B', text: '不降价格，但可以加服务——让他觉得"值"', scores: { P_plus: 1, B_minus: 1 } },
       { label: 'C', text: '给他一个台阶：这次合作价，下次恢复', scores: { R_plus: 1, M_minus: 1 } },
-      { label: 'D', text: '降。先把人拿下，后面再�?, scores: { R_plus: 1, P_minus: 1 } }
+      { label: 'D', text: '降。先把人拿下，后面再涨', scores: { R_plus: 1, P_minus: 1 } }
     ],
-    data: 'Hermès 历史上从未做过打折促销。它的逻辑是：降价损失的品牌势能，需�?10 年才能修复。但 Zara 的逻辑完全相反：快速清仓本身就是品牌的一部分—�?你现在不买就没了"�?
+    data: 'Hermès 历史上从未做过打折促销。它的逻辑是：降价损失的品牌势能，需要 10 年才能修复。但 Zara 的逻辑完全相反：快速清仓本身就是品牌的一部分——"你现在不买就没了"。'
   },
   // Q11
   {
     hall: 3, type: '生活', label: '植物',
-    narrator: '你对待一盆快死的植物的方式，就是你对待一个快死的项目的方式�?,
+    narrator: '你对待一盆快死的植物的方式，就是你对待一个快死的项目的方式。',
     text: '你养了一盆植物。它快死了。你的反应：',
     options: [
-      { label: 'A', text: '研究原因——是水多了还是光少了？然后精准调�?, scores: { P_plus: 1, R_minus: 1 } },
-      { label: 'B', text: '再买一盆。试错成本很�?, scores: { P_minus: 1, R_plus: 1 } },
-      { label: 'C', text: '有点难过。我觉得是我的问题，不是植物的问�?, scores: { S_plus: 1, M_plus: 1 } },
-      { label: 'D', text: '换个品种——选一个更好养的，别跟自己过不�?, scores: { S_minus: 1, B_minus: 1 } }
+      { label: 'A', text: '研究原因——是水多了还是光少了？然后精准调整', scores: { P_plus: 1, R_minus: 1 } },
+      { label: 'B', text: '再买一盆。试错成本很低', scores: { P_minus: 1, R_plus: 1 } },
+      { label: 'C', text: '有点难过。我觉得是我的问题，不是植物的问题', scores: { S_plus: 1, M_plus: 1 } },
+      { label: 'D', text: '换个品种——选一个更好养的，别跟自己过不去', scores: { S_minus: 1, B_minus: 1 } }
     ],
     data: null
   },
@@ -652,12 +654,12 @@ const questions = [
   {
     hall: 3, type: '商业', label: '质疑',
     narrator: '',
-    text: '有人说："你这个品牌定位太窄了，市场太小�?你的反应�?,
+    text: '有人说："你这个品牌定位太窄了，市场太小。"你的反应：',
     options: [
       { label: 'A', text: '我不在乎市场大小，我在乎这件事有没有意义', scores: { B_plus: 1, S_plus: 1 } },
-      { label: 'B', text: '谢谢，我回去再算一�?, scores: { R_minus: 1, B_minus: 1 } },
+      { label: 'B', text: '谢谢，我回去再算一下', scores: { R_minus: 1, B_minus: 1 } },
       { label: 'C', text: '窄才能穿透——所有大品牌都是从窄开始的', scores: { R_plus: 1, S_minus: 1 } },
-      { label: 'D', text: '你说的对，但那是你的逻辑，不是我�?, scores: { S_plus: 1, R_plus: 1 } }
+      { label: 'D', text: '你说的对，但那是你的逻辑，不是我的', scores: { S_plus: 1, R_plus: 1 } }
     ],
     data: null
   },
@@ -665,7 +667,7 @@ const questions = [
   {
     hall: 4, type: '幻想', label: '孤岛',
     narrator: '',
-    text: '你被困在一座无人岛上，有足够食物和水。你的第一反应�?,
+    text: '你被困在一座无人岛上，有足够食物和水。你的第一反应：',
     options: [
       { label: 'A', text: '终于安静了。我可以想清楚很多事', scores: { S_plus: 1, B_plus: 1 } },
       { label: 'B', text: '立刻想办法发信号——我必须回到世界中去', scores: { R_plus: 1, M_minus: 1 } },
@@ -679,22 +681,22 @@ const questions = [
   {
     hall: 4, type: '商业', label: '增长',
     narrator: '',
-    text: '品牌做了一年。口碑不错，但营收增长停滞。朋友建议你"找个操盘手来搞增�?。你的反应：',
+    text: '品牌做了一年。口碑不错，但营收增长停滞。朋友建议你"找个操盘手来搞增长"。你的反应：',
     options: [
-      { label: 'A', text: '可以，但我定方向，他跑执�?, scores: { S_minus: 1, B_minus: 1 } },
-      { label: 'B', text: '不需要。增长瓶颈的本质是产品还不够�?, scores: { P_plus: 1, S_plus: 1 } },
+      { label: 'A', text: '可以，但我定方向，他跑执行', scores: { S_minus: 1, B_minus: 1 } },
+      { label: 'B', text: '不需要。增长瓶颈的本质是产品还不够好', scores: { P_plus: 1, S_plus: 1 } },
       { label: 'C', text: '找，给股份，让他当合伙人——增长是命门', scores: { R_plus: 1, M_minus: 1 } },
-      { label: 'D', text: '不急。品牌的增长不应该靠"�?，应该靠"�?', scores: { R_minus: 1, M_plus: 1 } }
+      { label: 'D', text: '不急。品牌的增长不应该靠"搞"，应该靠"长"', scores: { R_minus: 1, M_plus: 1 } }
     ],
-    data: '哈佛商学�?2023 年研究：品牌型创业公司在�?2-3 年引入职业经理人的，5 年存活率�?38%；创始人始终亲管增长的，存活率为 22%。但后者一旦存活，品牌价值评估平均高�?3.6 倍�?
+    data: '哈佛商学院 2023 年研究：品牌型创业公司在第 2-3 年引入职业经理人的，5 年存活率为 38%；创始人始终亲管增长的，存活率为 22%。但后者一旦存活，品牌价值评估平均高出 3.6 倍。'
   },
   // Q15
   {
     hall: 4, type: '生活', label: '聚会',
-    narrator: '你在人群中的位置，就是你在市场中的位置�?,
-    text: '一个行业聚会上，你发现自己�?,
+    narrator: '你在人群中的位置，就是你在市场中的位置。',
+    text: '一个行业聚会上，你发现自己：',
     options: [
-      { label: 'A', text: '在角落和一个人深聊——广度不如深�?, scores: { S_plus: 1, B_plus: 1 } },
+      { label: 'A', text: '在角落和一个人深聊——广度不如深度', scores: { S_plus: 1, B_plus: 1 } },
       { label: 'B', text: '全场社交——每个人都可能是机会', scores: { R_plus: 1, M_minus: 1 } },
       { label: 'C', text: '观察谁是关键人物，只找他们聊', scores: { B_minus: 1, S_minus: 1 } },
       { label: 'D', text: '早退了。这种场合的 ROI 太低', scores: { R_minus: 1, M_plus: 1 } }
@@ -705,24 +707,24 @@ const questions = [
   {
     hall: 5, type: '商业', label: '失败',
     narrator: '',
-    text: '假设品牌失败了。三年后回头看，你最不能接受的是�?,
+    text: '假设品牌失败了。三年后回头看，你最不能接受的是：',
     options: [
-      { label: 'A', text: '我妥协了——为了活下去改了品牌最核心的东�?, scores: { S_plus: 1, B_plus: 1 } },
+      { label: 'A', text: '我妥协了——为了活下去改了品牌最核心的东西', scores: { S_plus: 1, B_plus: 1 } },
       { label: 'B', text: '我太慢了——明明看到了机会但没抓住', scores: { R_plus: 1, M_minus: 1 } },
-      { label: 'C', text: '我太散了——什么都试了，什么都没做�?, scores: { P_plus: 1, R_minus: 1 } },
+      { label: 'C', text: '我太散了——什么都试了，什么都没做透', scores: { P_plus: 1, R_minus: 1 } },
       { label: 'D', text: '我赔了太多钱——伤到了生活', scores: { M_plus: 1, R_minus: 1 } }
     ],
-    data: '乔布斯被自己创立的苹果开除后说："被炒是发生在我身上最好的事�? 但大部分创始人没有第二次机会——CB Insights 数据显示，首次创业失败者中只有 18% 会再次创业�?
+    data: '乔布斯被自己创立的苹果开除后说："被炒是发生在我身上最好的事。" 但大部分创始人没有第二次机会——CB Insights 数据显示，首次创业失败者中只有 18% 会再次创业。'
   },
   // Q17
   {
     hall: 5, type: '幻想', label: '平行世界',
-    narrator: '在那个世界里，你没有走进这扇门。你去了哪里�?,
+    narrator: '在那个世界里，你没有走进这扇门。你去了哪里？',
     text: '在一个平行世界里，你没有做品牌。你最可能在做什么？',
     options: [
       { label: 'A', text: '写作/拍片/做艺术——还是在表达', scores: { S_plus: 1, B_plus: 1 } },
       { label: 'B', text: '投资/交易——还是在博弈', scores: { B_minus: 1, M_minus: 1 } },
-      { label: 'C', text: '手艺�?匠人——安静地做一件精确的�?, scores: { P_plus: 1, M_plus: 1 } },
+      { label: 'C', text: '手艺人/匠人——安静地做一件精确的事', scores: { P_plus: 1, M_plus: 1 } },
       { label: 'D', text: '带一个团队做一件大事——不管是什么事', scores: { S_minus: 1, R_plus: 1 } }
     ],
     data: null
@@ -730,13 +732,13 @@ const questions = [
   // Q18
   {
     hall: 5, type: '幻想', label: '遗产',
-    narrator: '最后一间展厅里只有一面空白的墓碑。上面还没有字�?,
+    narrator: '最后一间展厅里只有一面空白的墓碑。上面还没有字。',
     text: '你离开这个世界后，你最希望别人记住你的是：',
     options: [
-      { label: 'A', text: '他创造了一种美——一种以前不存在的东�?, scores: { S_plus: 1, B_plus: 1 } },
-      { label: 'B', text: '他建了一个活�?100 年的系统', scores: { S_minus: 1, P_plus: 1 } },
-      { label: 'C', text: '他赢了——在所有人都不看好的时�?, scores: { R_plus: 1, M_minus: 1 } },
-      { label: 'D', text: '他活得自洽——赚到了钱也没丢掉自�?, scores: { M_plus: 1, R_minus: 1 } }
+      { label: 'A', text: '他创造了一种美——一种以前不存在的东西', scores: { S_plus: 1, B_plus: 1 } },
+      { label: 'B', text: '他建了一个活了 100 年的系统', scores: { S_minus: 1, P_plus: 1 } },
+      { label: 'C', text: '他赢了——在所有人都不看好的时候', scores: { R_plus: 1, M_minus: 1 } },
+      { label: 'D', text: '他活得自洽——赚到了钱也没丢掉自己', scores: { M_plus: 1, R_minus: 1 } }
     ],
     data: null
   }
@@ -744,90 +746,90 @@ const questions = [
 
 // ===== ARCHETYPES =====
 const archetypes = {
-  '孤岛上的�?: {
+  '孤岛上的火': {
     id: 'BRAND-MIND-001',
     image: './img/archetype-island-fire.jpg',
     tagline: '极致个人化，不妥协，要么引爆要么熄灭',
     mindMap: [
       '底层信念：世界亏欠一种还不存在的美，我来补上',
-      '行为程序：先点火，再看风往哪吹——但从不灭自己的�?,
-      '品牌关系：品牌是我的器官，不是我的工�?,
+      '行为程序：先点火，再看风往哪吹——但从不灭自己的火',
+      '品牌关系：品牌是我的器官，不是我的工具',
       '赚钱姿态：钱来了是认可，没来是时机未到',
-      '产品基因：每件作品都带着体温，无法量�?
+      '产品基因：每件作品都带着体温，无法量产'
     ],
-    weapons: ['感染力——你的真诚能穿透屏�?, '不可复制性——没有人能山寨你的灵�?],
-    wounds: ['孤独即死亡——如果没有回响，火会自我怀�?, '无法委托——你做不到让别人替你燃烧'],
+    weapons: ['感染力——你的真诚能穿透屏幕', '不可复制性——没有人能山寨你的灵魂'],
+    wounds: ['孤独即死亡——如果没有回响，火会自我怀疑', '无法委托——你做不到让别人替你燃烧'],
     mirrors: '早期 Supreme / 川久保玲 CDG / 观夏',
-    quote: '"你不需要所有人喜欢你。你只需要让对的人，在深夜里找到你的光�?',
-    status: '燃烧�?
+    quote: '"你不需要所有人喜欢你。你只需要让对的人，在深夜里找到你的光。"',
+    status: '燃烧中'
   },
   '子弹列车': {
     id: 'BRAND-MIND-002',
     image: './img/archetype-bullet-train.jpg',
-    tagline: '快、猛、规模化，用速度碾压一切犹�?,
+    tagline: '快、猛、规模化，用速度碾压一切犹豫',
     mindMap: [
-      '底层信念：世界属于先开枪的人，瞄准是边跑边做的�?,
-      '行为程序：发现机会→全速压上→快速验证→不对就换�?,
-      '品牌关系：品牌是子弹的弹道——方向对了，威力自然�?,
+      '底层信念：世界属于先开枪的人，瞄准是边跑边做的事',
+      '行为程序：发现机会→全速压上→快速验证→不对就换轨',
+      '品牌关系：品牌是子弹的弹道——方向对了，威力自然来',
       '赚钱姿态：钱是速度的副产品，跑得够快利润追着你来',
-      '产品基因：不求完美，�?比对手早三步"'
+      '产品基因：不求完美，求"比对手早三步"'
     ],
-    weapons: ['执行力——当别人还在PPT时你已经拿到数据�?, '抗压力——高速运转中你反而更清醒'],
-    wounds: ['刹不住车——速度成瘾后，慢下来等于死', '品牌空心——用户记住了便宜，没记住你是�?],
-    mirrors: '瑞幸咖啡 / SHEIN / 拼多�?,
-    quote: '"速度是你的信仰，但记住——子弹飞到终点时会停下来。你想停在哪�?',
+    weapons: ['执行力——当别人还在PPT时你已经拿到数据了', '抗压力——高速运转中你反而更清醒'],
+    wounds: ['刹不住车——速度成瘾后，慢下来等于死', '品牌空心——用户记住了便宜，没记住你是谁'],
+    mirrors: '瑞幸咖啡 / SHEIN / 拼多多',
+    quote: '"速度是你的信仰，但记住——子弹飞到终点时会停下来。你想停在哪？"',
     status: '加速中'
   },
   '深海灯塔': {
     id: 'BRAND-MIND-003',
     image: './img/archetype-deep-sea-lighthouse.jpg',
-    tagline: '安静但持久，你不找人，人来找�?,
+    tagline: '安静但持久，你不找人，人来找你',
     mindMap: [
-      '底层信念：真正好的东西不需要叫卖，它自己发�?,
+      '底层信念：真正好的东西不需要叫卖，它自己发光',
       '行为程序：先想清楚再动手——但一旦亮了就不灭',
       '品牌关系：品牌是我的呼吸频率，不快不慢，一直在',
-      '赚钱姿态：利润是耐心的回报，急不�?,
-      '产品基因：每一个细节都经过反复推敲，像诗一样精�?
+      '赚钱姿态：利润是耐心的回报，急不来',
+      '产品基因：每一个细节都经过反复推敲，像诗一样精确'
     ],
     weapons: ['长期主义的定力——你天生免疫风口焦虑', '品牌忠诚度——你的用户是信徒不是顾客'],
     wounds: ['太慢——市场不一定等得起你的节奏', '沉默成本——不会吆喝让太多人错过你'],
-    mirrors: 'Aesop / 无印良品早期 / 小罐�?,
-    quote: '"你的光在水下也能到达水面。问题是——你能等到那些迷航的人吗�?',
-    status: '蛰伏�?
+    mirrors: 'Aesop / 无印良品早期 / 小罐茶',
+    quote: '"你的光在水下也能到达水面。问题是——你能等到那些迷航的人吗？"',
+    status: '蛰伏中'
   },
-  '提线木偶�?: {
+  '提线木偶师': {
     id: 'BRAND-MIND-004',
     image: './img/archetype-puppet-master.jpg',
     tagline: '幕后操盘，一个大脑控制多条线',
     mindMap: [
-      '底层信念：最好的控制是让被控制者浑然不�?,
+      '底层信念：最好的控制是让被控制者浑然不觉',
       '行为程序：搭系统→放人进去→在暗处调节每一根线',
-      '品牌关系：品牌是我设计的游戏，我是规则制定�?,
+      '品牌关系：品牌是我设计的游戏，我是规则制定者',
       '赚钱姿态：一份精力变成多份收益——杠杆思维',
       '产品基因：标准化、可复制、不依赖任何单一个体'
     ],
     weapons: ['系统能力——你能让复杂的事变得可控', '全局视角——当别人在棋盘里时你看到的是整个棋盘'],
-    wounds: ['缺乏温度——用户感知不�?�?的存�?, '控制瘾——一旦有变量脱离掌控你会极度不安'],
-    mirrors: '宝洁�?/ 安踏多品�?/ 字节跳动',
-    quote: '"线拉得越紧越容易断。最好的操盘手知道何时放手�?',
-    status: '运转�?
+    wounds: ['缺乏温度——用户感知不到"人"的存在', '控制瘾——一旦有变量脱离掌控你会极度不安'],
+    mirrors: '宝洁系 / 安踏多品牌 / 字节跳动',
+    quote: '"线拉得越紧越容易断。最好的操盘手知道何时放手。"',
+    status: '运转中'
   },
   '赤脚医生': {
     id: 'BRAND-MIND-005',
     image: './img/archetype-barefoot-doctor.jpg',
     tagline: '解决真问题，野路子但有效，赚的是信任的钱',
     mindMap: [
-      '底层信念：商业的本质是解决问题，不是制造幻�?,
-      '行为程序：先扎进去看病症→用手边能拿到的东西治→治好了收�?,
+      '底层信念：商业的本质是解决问题，不是制造幻觉',
+      '行为程序：先扎进去看病症→用手边能拿到的东西治→治好了收钱',
       '品牌关系：品牌是口碑攒出来的——不是设计出来的',
-      '赚钱姿态：赚的每一块钱都对应一个被解决的问�?,
-      '产品基因：不精致但有效，先治病再谈包�?
+      '赚钱姿态：赚的每一块钱都对应一个被解决的问题',
+      '产品基因：不精致但有效，先治病再谈包装'
     ],
-    weapons: ['接地气——你比任何人都了解用户真正的�?, '信任护城河——用户把你当"自己�?'],
+    weapons: ['接地气——你比任何人都了解用户真正的痛', '信任护城河——用户把你当"自己人"'],
     wounds: ['审美负债——有效但不美，规模化时会撞墙', '路径依赖——野路子走惯了，正规军打法学不来'],
-    mirrors: '早期小米 / 蜜雪冰城 / 老乡�?,
-    quote: '"你能治病，但别忘了——最好的医生最终不用出诊�?',
-    status: '问诊�?
+    mirrors: '早期小米 / 蜜雪冰城 / 老乡鸡',
+    quote: '"你能治病，但别忘了——最好的医生最终不用出诊。"',
+    status: '问诊中'
   },
   '玻璃心铸剑师': {
     id: 'BRAND-MIND-006',
@@ -835,15 +837,15 @@ const archetypes = {
     tagline: '产品极致主义，慢到让人着急，但出手即经典',
     mindMap: [
       '底层信念：不完美的东西不配见天日',
-      '行为程序：反复打磨→否定→重来→直到自己满意那一�?,
-      '品牌关系：品牌是产品自然溢出的光环——产品不行一切白�?,
-      '赚钱姿态：赚少一点没关系，品质不能妥�?,
+      '行为程序：反复打磨→否定→重来→直到自己满意那一刻',
+      '品牌关系：品牌是产品自然溢出的光环——产品不行一切白搭',
+      '赚钱姿态：赚少一点没关系，品质不能妥协',
       '产品基因：每个产品都是一封写了三年的情书'
     ],
     weapons: ['极致品质——你的产品本身就是最好的广告', '稀缺性——慢出手让每次都成为事件'],
-    wounds: ['完美主义陷阱——永�?还差一�?导致错过所有窗�?, '脆弱——一个差评能让你失眠一�?],
-    mirrors: '锤子手机 / Rimowa / 三顿�?,
-    quote: '"你的玻璃心不是弱点——它是你感知世界精度的天线。但别让它切伤自己�?',
+    wounds: ['完美主义陷阱——永远"还差一点"导致错过所有窗口', '脆弱——一个差评能让你失眠一周'],
+    mirrors: '锤子手机 / Rimowa / 三顿半',
+    quote: '"你的玻璃心不是弱点——它是你感知世界精度的天线。但别让它切伤自己。"',
     status: '锻造中'
   },
   '空中飞人': {
@@ -851,109 +853,109 @@ const archetypes = {
     image: './img/archetype-air-acrobat.jpg',
     tagline: '什么火做什么，永远在风口，品牌是副产品',
     mindMap: [
-      '底层信念：机会比坚持重要——世界是流动�?,
-      '行为程序：看到风口→冲→做出声量→套现→寻找下一�?,
-      '品牌关系：品牌是阶段性的工具，不是终生伴�?,
-      '赚钱姿态：钱在哪里我就在哪里——灵活就是我的品�?,
+      '底层信念：机会比坚持重要——世界是流动的',
+      '行为程序：看到风口→冲→做出声量→套现→寻找下一个',
+      '品牌关系：品牌是阶段性的工具，不是终生伴侣',
+      '赚钱姿态：钱在哪里我就在哪里——灵活就是我的品牌',
       '产品基因：轻、快、可替换——不跟任何一件事死磕'
     ],
     weapons: ['趋势嗅觉——你总能比别人早半步闻到钱的味道', '轻资产能力——放下的速度和拿起的速度一样快'],
-    wounds: ['没有根——用户记不住你，团队也留不住', '高空坠落——一旦判断失误，没有安全�?],
-    mirrors: '完美日记早期 / 各种白牌矩阵 / 直播电商操盘�?,
-    quote: '"飞得高看得远，但记住——所有飞行都需要一个地方降落�?',
-    status: '悬浮�?
+    wounds: ['没有根——用户记不住你，团队也留不住', '高空坠落——一旦判断失误，没有安全网'],
+    mirrors: '完美日记早期 / 各种白牌矩阵 / 直播电商操盘手',
+    quote: '"飞得高看得远，但记住——所有飞行都需要一个地方降落。"',
+    status: '悬浮中'
   },
-  '地下水系�?: {
+  '地下水系统': {
     id: 'BRAND-MIND-008',
     image: './img/archetype-underground-water.jpg',
-    tagline: '不声不响把管道铺好，等势能到了一次释�?,
+    tagline: '不声不响把管道铺好，等势能到了一次释放',
     mindMap: [
-      '底层信念：看不见的基础设施决定了看得见的繁�?,
-      '行为程序：默默铺管道→测试→确认能跑通→然后一次性开�?,
-      '品牌关系：品牌是系统运转后自然浮现的冰山一�?,
+      '底层信念：看不见的基础设施决定了看得见的繁荣',
+      '行为程序：默默铺管道→测试→确认能跑通→然后一次性开闸',
+      '品牌关系：品牌是系统运转后自然浮现的冰山一角',
       '赚钱姿态：前期不赚钱是投资，后期不赚钱才是失败',
-      '产品基因：底层逻辑扎实，表面越简单越�?
+      '产品基因：底层逻辑扎实，表面越简单越好'
     ],
     weapons: ['延迟满足能力——你能在没有正反馈时坚持三年', '壁垒思维——你铺的管道别人绕不过去'],
-    wounds: ['太隐忍——世界可能不给你"等到那天"的机�?, '闷声做事但不会讲故事，错过品牌红利期'],
-    mirrors: 'Costco / 胖东�?/ 华为早期',
-    quote: '"地下水终会涌出地面。但你得确保——你还在井口等着�?',
-    status: '蓄势�?
+    wounds: ['太隐忍——世界可能不给你"等到那天"的机会', '闷声做事但不会讲故事，错过品牌红利期'],
+    mirrors: 'Costco / 胖东来 / 华为早期',
+    quote: '"地下水终会涌出地面。但你得确保——你还在井口等着。"',
+    status: '蓄势中'
   },
-  '镜中�?: {
+  '镜中人': {
     id: 'BRAND-MIND-009',
     image: './img/archetype-mirror-man.jpg',
     tagline: '品牌就是创始人本人的倒影，人在品牌在',
     mindMap: [
-      '底层信念：我就是品牌，品牌就是我——不可分�?,
-      '行为程序：用自己的故�?审美/价值观去定义一切品牌表�?,
+      '底层信念：我就是品牌，品牌就是我——不可分割',
+      '行为程序：用自己的故事/审美/价值观去定义一切品牌表达',
       '品牌关系：我和品牌是同一个人的正反面',
-      '赚钱姿态：赚钱是证�?我这种人值钱"的方�?,
+      '赚钱姿态：赚钱是证明"我这种人值钱"的方式',
       '产品基因：所有产品都带着创始人的强烈个人印记'
     ],
     weapons: ['人格化壁垒——没有人能复制你本人', '叙事力——你天然知道怎么讲一个让人买单的故事'],
     wounds: ['品牌即人的风险——你生病了品牌也发烧', '天花板就是创始人本人的天花板'],
     mirrors: '老罗 / 雷军个人品牌 / Elon Musk / 张兰',
-    quote: '"镜子里的你比真实的你更被世界需要。但别忘了——镜子背后还有一个人需要生活�?',
-    status: '显影�?
+    quote: '"镜子里的你比真实的你更被世界需要。但别忘了——镜子背后还有一个人需要生活。"',
+    status: '显影中'
   },
   '永动赌桌': {
     id: 'BRAND-MIND-010',
     image: './img/archetype-perpetual-gambler.jpg',
     tagline: '连续下注，品牌是筹码不是终点',
     mindMap: [
-      '底层信念：人生是一场无限游戏，每次下注都是新开�?,
+      '底层信念：人生是一场无限游戏，每次下注都是新开始',
       '行为程序：下注→赢了加码→输了换桌→绝不离场',
       '品牌关系：品牌是赌桌上的筹码——可以押也可以换',
-      '赚钱姿态：赚钱是为了有更多筹码，不是为了离�?,
-      '产品基因：不执着于任何单一产品，执着�?�?的感�?
+      '赚钱姿态：赚钱是为了有更多筹码，不是为了离场',
+      '产品基因：不执着于任何单一产品，执着于"赢"的感觉'
     ],
-    weapons: ['永不停歇的能量——失败对你来说只是换个方�?, '概率思维——你比任何人都清�?期望�?这件�?],
-    wounds: ['没有终点——你可能永远赢不�?, '信任透支——身边的人跟不上你换轨的速度'],
-    mirrors: '连续创业�?/ 贾跃�?/ 各种"连续"创始�?,
-    quote: '"赌桌上最危险的不是输——是不知道什么时候该站起来离开�?',
-    status: '下注�?
+    weapons: ['永不停歇的能量——失败对你来说只是换个方向', '概率思维——你比任何人都清楚"期望值"这件事'],
+    wounds: ['没有终点——你可能永远赢不够', '信任透支——身边的人跟不上你换轨的速度'],
+    mirrors: '连续创业者 / 贾跃亭 / 各种"连续"创始人',
+    quote: '"赌桌上最危险的不是输——是不知道什么时候该站起来离开。"',
+    status: '下注中'
   },
-  '梦游�?: {
+  '梦游者': {
     id: 'BRAND-MIND-EGG-A',
     image: './img/archetype-sleepwalker.jpg',
-    tagline: '你还在岸上看海，海浪的声音是唯一的真�?,
+    tagline: '你还在岸上看海，海浪的声音是唯一的真实',
     mindMap: [
       '底层信念：也许不开始就不会结束',
       '行为程序：想了很多→差一步→又退回来→继续想',
       '品牌关系：品牌是梦里的建筑——宏伟但还没落地',
-      '赚钱姿态：赚钱是醒来后才需要面对的�?,
-      '产品基因：脑海中有一百个产品，现实里还没有一�?
+      '赚钱姿态：赚钱是醒来后才需要面对的事',
+      '产品基因：脑海中有一百个产品，现实里还没有一个'
     ],
-    weapons: ['想象力——你的内在世界比大多数人的外在事业都丰富', '直觉——你对品牌的感知常常是对�?],
-    wounds: ['启动障碍—�?再想�?是你最常说的三个字', '与现实脱节——梦里的品牌和市场的品牌之间有一道鸿�?],
-    mirrors: '所�?本来想做"的人 / 那些差一步就开始的计划',
-    quote: '"梦游不是缺陷，是保护。但当你准备好醒来——世界一直在那里�?',
-    status: '漂浮�?
+    weapons: ['想象力——你的内在世界比大多数人的外在事业都丰富', '直觉——你对品牌的感知常常是对的'],
+    wounds: ['启动障碍——"再想想"是你最常说的三个字', '与现实脱节——梦里的品牌和市场的品牌之间有一道鸿沟'],
+    mirrors: '所有"本来想做"的人 / 那些差一步就开始的计划',
+    quote: '"梦游不是缺陷，是保护。但当你准备好醒来——世界一直在那里。"',
+    status: '漂浮中'
   },
-  '薛定谔的创始�?: {
+  '薛定谔的创始人': {
     id: 'BRAND-MIND-EGG-B',
     image: './img/archetype-schrodinger.jpg',
-    tagline: '你同时存在于开始和放弃之间，叠加态本身就是你的品�?,
+    tagline: '你同时存在于开始和放弃之间，叠加态本身就是你的品牌',
     mindMap: [
-      '底层信念：每件事都有两面——而你同时看到了两�?,
-      '行为程序：下决定→质疑决定→反转→再反转→维持在量子�?,
+      '底层信念：每件事都有两面——而你同时看到了两面',
+      '行为程序：下决定→质疑决定→反转→再反转→维持在量子态',
       '品牌关系：品牌是你和自己对话的方式——还没有结论',
-      '赚钱姿态：赚钱和不赚钱之间反复横跳——因为你对两边都有道�?,
-      '产品基因：什么都想做好，所以什么都做了一�?
+      '赚钱姿态：赚钱和不赚钱之间反复横跳——因为你对两边都有道理',
+      '产品基因：什么都想做好，所以什么都做了一半'
     ],
     weapons: ['全维度思考——你是唯一能同时理解对手和自己的人', '弹性——矛盾让你比任何人都灵活'],
-    wounds: ['决策瘫痪——你的智慧变成了行动的阻�?, '他人困惑——团队不知道你到底要什�?],
-    mirrors: '所�?想太明白了反而动不了"的创始人',
-    quote: '"叠加态不是犹豫——是你在等一个足够大的理由坍缩。也许这个测试就是�?',
-    status: '叠加�?
+    wounds: ['决策瘫痪——你的智慧变成了行动的阻力', '他人困惑——团队不知道你到底要什么'],
+    mirrors: '所有"想太明白了反而动不了"的创始人',
+    quote: '"叠加态不是犹豫——是你在等一个足够大的理由坍缩。也许这个测试就是。"',
+    status: '叠加中'
   }
 };
 
 // ===== ARCHETYPE MAPPING =====
 function resolveArchetype() {
   // Easter eggs first
-  if (state.flags.dreamer >= 2) return '梦游�?;
+  if (state.flags.dreamer >= 2) return '梦游者';
   
   const s = state.scores;
   const axes = {
@@ -967,7 +969,7 @@ function resolveArchetype() {
   // Check contradictions (Schrodinger)
   let contradictions = 0;
   Object.values(axes).forEach(v => { if (Math.abs(v) <= 1) contradictions++; });
-  if (contradictions >= 3) return '薛定谔的创始�?;
+  if (contradictions >= 3) return '薛定谔的创始人';
   
   // Sort by absolute value
   const sorted = Object.entries(axes).sort((a, b) => Math.abs(b[1]) - Math.abs(a[1]));
@@ -980,7 +982,7 @@ function resolveArchetype() {
   
   // R+ dominant
   if (p === 'R+') {
-    if (sec === 'B+' || sec === 'S+') return '孤岛上的�?;
+    if (sec === 'B+' || sec === 'S+') return '孤岛上的火';
     if (sec === 'B-' || sec === 'S-') return '子弹列车';
     if (sec === 'M-' || sec === 'P-') return '永动赌桌';
     if (sec === 'M+' || sec === 'P+') return '赤脚医生';
@@ -989,38 +991,38 @@ function resolveArchetype() {
   // R- dominant
   if (p === 'R-') {
     if (sec === 'S+' || sec === 'B+') return '深海灯塔';
-    if (sec === 'S-' || sec === 'B-') return '提线木偶�?;
-    if (sec === 'M+' || sec === 'P+') return '地下水系�?;
-    if (sec === 'M-') return '提线木偶�?;
+    if (sec === 'S-' || sec === 'B-') return '提线木偶师';
+    if (sec === 'M+' || sec === 'P+') return '地下水系统';
+    if (sec === 'M-') return '提线木偶师';
     if (sec === 'P-') return '深海灯塔';
     return '深海灯塔';
   }
   // S+ dominant
   if (p === 'S+') {
-    if (sec === 'B+' || sec === 'M+') return '镜中�?;
-    if (sec === 'R+') return '孤岛上的�?;
+    if (sec === 'B+' || sec === 'M+') return '镜中人';
+    if (sec === 'R+') return '孤岛上的火';
     if (sec === 'R-') return '深海灯塔';
     if (sec === 'P+') return '玻璃心铸剑师';
-    return '镜中�?;
+    return '镜中人';
   }
   // S- dominant
   if (p === 'S-') {
-    if (sec === 'R-' || sec === 'B-') return '提线木偶�?;
+    if (sec === 'R-' || sec === 'B-') return '提线木偶师';
     if (sec === 'R+') return '子弹列车';
-    if (sec === 'M+') return '地下水系�?;
-    return '提线木偶�?;
+    if (sec === 'M+') return '地下水系统';
+    return '提线木偶师';
   }
   // B+ dominant
   if (p === 'B+') {
     if (sec === 'S+' || sec === 'R-') return '深海灯塔';
-    if (sec === 'R+') return '孤岛上的�?;
-    if (sec === 'M+') return '镜中�?;
-    return '孤岛上的�?;
+    if (sec === 'R+') return '孤岛上的火';
+    if (sec === 'M+') return '镜中人';
+    return '孤岛上的火';
   }
   // B- dominant
   if (p === 'B-') {
     if (sec === 'R+' || sec === 'S-') return '子弹列车';
-    if (sec === 'R-') return '提线木偶�?;
+    if (sec === 'R-') return '提线木偶师';
     if (sec === 'M-') return '永动赌桌';
     return '子弹列车';
   }
@@ -1034,27 +1036,27 @@ function resolveArchetype() {
   // P- dominant
   if (p === 'P-') {
     if (sec === 'R+' || sec === 'M-') return '空中飞人';
-    if (sec === 'R-') return '提线木偶�?;
+    if (sec === 'R-') return '提线木偶师';
     return '空中飞人';
   }
   // M+ dominant
   if (p === 'M+') {
-    if (sec === 'R-' || sec === 'S-') return '地下水系�?;
-    if (sec === 'S+') return '镜中�?;
+    if (sec === 'R-' || sec === 'S-') return '地下水系统';
+    if (sec === 'S+') return '镜中人';
     if (sec === 'R+') return '赤脚医生';
     if (sec === 'P+') return '赤脚医生';
-    return '地下水系�?;
+    return '地下水系统';
   }
   // M- dominant
   if (p === 'M-') {
     if (sec === 'R+' || sec === 'P-') return '永动赌桌';
     if (sec === 'B-') return '永动赌桌';
-    if (sec === 'R-') return '提线木偶�?;
+    if (sec === 'R-') return '提线木偶师';
     return '空中飞人';
   }
   
   // Fallback
-  return '孤岛上的�?;
+  return '孤岛上的火';
 }
 
 // ===== NAVIGATION =====
@@ -1107,7 +1109,7 @@ function enterFirstHall() {
 function showHall(index) {
   const hall = halls[index];
   document.querySelector('#hall-screen .hall-number').textContent = hall.number;
-  document.querySelector('#hall-screen .hall-name').textContent = '�? + hall.name + '�?;
+  document.querySelector('#hall-screen .hall-name').textContent = '「' + hall.name + '」';
   document.querySelector('#hall-screen .hall-narrator').textContent = hall.narrator;
   hallQuestionIndex = 0;
   showScreen('hall-screen');
@@ -1128,7 +1130,7 @@ function showQuestion(qIndex) {
   function renderQuestion() {
     document.querySelector('.q-meta').textContent = 'Q' + (qIndex + 1).toString().padStart(2, '0') + ' / 18';
     document.querySelector('.q-type').textContent = '[' + q.type + '] ' + q.label;
-    document.querySelector('.q-narrator').textContent = q.narrator ? '馆长�? + q.narrator : '';
+    document.querySelector('.q-narrator').textContent = q.narrator ? '馆长：' + q.narrator : '';
     document.querySelector('.q-text').textContent = q.text;
     
     const optContainer = document.querySelector('.q-options');
@@ -1144,14 +1146,14 @@ function showQuestion(qIndex) {
   }
   
   if (isAlreadyOnQuestionScreen) {
-    // 同一�?screen 内切换：先淡出再淡入
+    // 同一个 screen 内切换：先淡出再淡入
     qContent.classList.add('fade-out');
     setTimeout(() => {
       renderQuestion();
       qContent.classList.remove('fade-out');
     }, 420);
   } else {
-    // 从其�?screen 切换过来
+    // 从其他 screen 切换过来
     renderQuestion();
     showScreen('question-screen');
   }
@@ -1245,11 +1247,12 @@ function showResult() {
   const archetypeName = resolveArchetype();
   const arch = archetypes[archetypeName];
   
-  // 自动提交数据到飞�?  submitToFeishu(archetypeName);
+  // 自动提交数据到飞书
+  submitToFeishu(archetypeName);
   
   document.getElementById('result-img').src = arch.image;
   document.getElementById('result-id').textContent = '─── 档案编号 ' + arch.id + ' ───';
-  document.getElementById('result-name').textContent = '�? + archetypeName + '�?;
+  document.getElementById('result-name').textContent = '「' + archetypeName + '」';
   document.getElementById('result-tagline').textContent = arch.tagline;
   
   let bodyHtml = '';
@@ -1264,19 +1267,21 @@ function showResult() {
   arch.weapons.forEach(item => { bodyHtml += '<li>' + item + '</li>'; });
   bodyHtml += '</ul></div>';
   
-  // 你的致命�?  bodyHtml += '<div class="result-section"><div class="result-section-title">─── 你的致命�?───</div><ul>';
+  // 你的致命伤
+  bodyHtml += '<div class="result-section"><div class="result-section-title">─── 你的致命伤 ───</div><ul>';
   arch.wounds.forEach(item => { bodyHtml += '<li>' + item + '</li>'; });
   bodyHtml += '</ul></div>';
   
   // 现实镜像
   bodyHtml += '<div class="result-section"><div class="result-section-title">─── 现实镜像 ───</div>';
-  bodyHtml += '<p>与你同类型的品牌�? + arch.mirrors + '</p></div>';
+  bodyHtml += '<p>与你同类型的品牌：' + arch.mirrors + '</p></div>';
   
   // 给你的一句话
   bodyHtml += '<div class="result-section"><div class="result-section-title">─── 给你的一句话 ───</div>';
   bodyHtml += '<div class="final-quote">' + arch.quote + '</div></div>';
   
-  // 档案状�?  bodyHtml += '<div class="result-section"><div class="result-section-title">─── 档案状�?───</div>';
+  // 档案状态
+  bodyHtml += '<div class="result-section"><div class="result-section-title">─── 档案状态 ───</div>';
   bodyHtml += '<p style="color:#FF0000; font-family: Courier New, monospace; letter-spacing:0.1em;">[' + arch.status + ']</p></div>';
   
   document.getElementById('result-body').innerHTML = bodyHtml;
@@ -1288,7 +1293,7 @@ function shareResult() {
   const archetypeName = resolveArchetype();
   const arch = archetypes[archetypeName];
   
-  const text = `我在「品牌心智标本馆」完成了心智切片——\n\n我的原型是：�?{archetypeName}」\n${arch.tagline}\n\n${arch.quote}\n\n来测测你是什么品牌心智原�?→`;
+  const text = `我在「品牌心智标本馆」完成了心智切片——\n\n我的原型是：「${archetypeName}」\n${arch.tagline}\n\n${arch.quote}\n\n来测测你是什么品牌心智原型 →`;
   
   navigator.clipboard.writeText(text).then(() => {
     const toast = document.getElementById('share-toast');
@@ -1327,7 +1332,7 @@ async function submitToFeishu(archetypeName) {
     const optLabels = ['A', 'B', 'C', 'D', 'E'];
     const fields = {
       '名字': state.userName,
-      '最终原�?: archetypeName,
+      '最终原型': archetypeName,
       '测试时间': Date.now(),
       '分数详情': JSON.stringify(state.scores)
     };
