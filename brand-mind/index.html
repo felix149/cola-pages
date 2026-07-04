@@ -352,12 +352,65 @@ h3 { font-size: 1.1rem; color: #E8E0D8; margin-bottom: 12px; }
 }
 
 .share-area { margin-top: 40px; text-align: center; }
+.share-area .btn-sm { margin-bottom: 12px; display: block; width: 200px; margin-left: auto; margin-right: auto; }
 .share-toast {
   font-size: 0.75rem; color: #666;
   margin-top: 10px; opacity: 0;
   transition: opacity 0.3s;
 }
 .share-toast.show { opacity: 1; }
+
+/* ===== RESULT QR ===== */
+.result-qr-area {
+  margin-top: 30px; text-align: center;
+  padding-top: 20px; border-top: 1px solid #222;
+}
+.result-qr {
+  width: 100px; height: 100px;
+  border-radius: 4px;
+  background: #fff; padding: 4px;
+}
+.result-qr-hint {
+  font-size: 0.65rem; color: #555;
+  margin-top: 8px; letter-spacing: 0.1em;
+  font-family: "Courier New", monospace;
+}
+
+/* ===== DEEPER SCREEN ===== */
+#deeper-screen {
+  justify-content: center; align-items: center;
+  text-align: center; position: relative;
+}
+.deeper-back {
+  position: absolute; top: 24px; left: 24px;
+  font-size: 1.5rem; color: #E8E0D8;
+  cursor: pointer; z-index: 10;
+  transition: color 0.3s;
+}
+.deeper-back:hover { color: #FF0000; }
+.deeper-content {
+  display: flex; flex-direction: column;
+  align-items: center; max-width: 320px;
+}
+.deeper-text {
+  font-size: 0.95rem; color: #E8E0D8;
+  line-height: 2.2; letter-spacing: 0.05em;
+  margin-bottom: 40px;
+  font-family: "Noto Serif SC", serif;
+}
+.deeper-keywords {
+  color: #FF0000; font-weight: 500;
+}
+.deeper-qr {
+  width: 160px; height: 160px;
+  background: #fff; padding: 8px;
+  border-radius: 6px;
+}
+.deeper-qr-hint {
+  font-size: 0.7rem; color: #555;
+  margin-top: 12px; letter-spacing: 0.2em;
+  font-family: "Courier New", monospace;
+}
 
 /* ===== PROGRESS BAR ===== */
 #progress-bar {
@@ -456,14 +509,30 @@ h3 { font-size: 1.1rem; color: #E8E0D8; margin-bottom: 12px; }
 
   <!-- RESULT -->
   <div class="screen" id="result-screen">
-    <img class="result-portrait" id="result-img" src="" alt="">
-    <div class="result-id" id="result-id"></div>
-    <div class="result-name" id="result-name"></div>
-    <div class="result-tagline" id="result-tagline"></div>
-    <div id="result-body"></div>
+    <div id="result-card">
+      <img class="result-portrait" id="result-img" src="" alt="">
+      <div class="result-id" id="result-id"></div>
+      <div class="result-name" id="result-name"></div>
+      <div class="result-tagline" id="result-tagline"></div>
+      <div id="result-body"></div>
+      <div class="result-qr-area">
+        <img src="./img/qrcode-wechat.png" class="result-qr" alt="QR">
+        <div class="result-qr-hint">扫码测试你的品牌心智原型</div>
+      </div>
+    </div>
     <div class="share-area">
-      <button class="btn btn-sm" onclick="shareResult()">复制分享文案</button>
-      <div class="share-toast" id="share-toast">已复制到剪贴板</div>
+      <button class="btn btn-sm" onclick="shareResult()">测试结果分享</button>
+      <button class="btn btn-sm" onclick="showScreen('deeper-screen')">继续深入</button>
+    </div>
+  </div>
+
+  <!-- DEEPER -->
+  <div class="screen" id="deeper-screen">
+    <div class="deeper-back" onclick="showScreen('result-screen')">←</div>
+    <div class="deeper-content">
+      <div class="deeper-text">与 Brand Fable 创始人 Felix，<br>一起深入探索关于你心智里的那些<br><span class="deeper-keywords">【创业】、【自我】、【产品】与【品牌】</span>。</div>
+      <img src="./img/qrcode-wechat.png" class="deeper-qr" alt="WeChat QR">
+      <div class="deeper-qr-hint">SCAN TO CONNECT</div>
     </div>
   </div>
 </div>
@@ -1146,12 +1215,19 @@ function showQuestion(qIndex) {
   }
   
   if (isAlreadyOnQuestionScreen) {
-    // 同一个 screen 内切换：先淡出再淡入
-    qContent.classList.add('fade-out');
-    setTimeout(() => {
+    // 同一个 screen 内切换
+    if (qContent.classList.contains('fade-out')) {
+      // 已经淡出了（从 data overlay 来），直接渲染新内容然后淡入
       renderQuestion();
-      qContent.classList.remove('fade-out');
-    }, 420);
+      setTimeout(() => qContent.classList.remove('fade-out'), 50);
+    } else {
+      // 手动触发淡出再淡入
+      qContent.classList.add('fade-out');
+      setTimeout(() => {
+        renderQuestion();
+        qContent.classList.remove('fade-out');
+      }, 420);
+    }
   } else {
     // 从其他 screen 切换过来
     renderQuestion();
@@ -1210,8 +1286,14 @@ function showDataOverlay(text, callback) {
 function dismissDataOverlay() {
   const overlay = document.getElementById('data-overlay');
   const callback = overlay._callback;
+  // 先让题目内容淡出，避免闪现旧题
+  const qContent = document.getElementById('q-content');
+  if (qContent) qContent.classList.add('fade-out');
   overlay.style.opacity = '0';
-  setTimeout(() => { overlay.style.display = 'none'; if (callback) callback(); }, 400);
+  setTimeout(() => {
+    overlay.style.display = 'none';
+    if (callback) callback();
+  }, 400);
 }
 
 function advanceQuestion() {
@@ -1290,24 +1372,33 @@ function showResult() {
 }
 
 function shareResult() {
-  const archetypeName = resolveArchetype();
-  const arch = archetypes[archetypeName];
-  
-  const text = `我在「品牌心智标本馆」完成了心智切片——\n\n我的原型是：「${archetypeName}」\n${arch.tagline}\n\n${arch.quote}\n\n来测测你是什么品牌心智原型 →`;
-  
-  navigator.clipboard.writeText(text).then(() => {
-    const toast = document.getElementById('share-toast');
-    toast.classList.add('show');
-    setTimeout(() => toast.classList.remove('show'), 2000);
-  }).catch(() => {
-    // Fallback
-    const ta = document.createElement('textarea');
-    ta.value = text; document.body.appendChild(ta);
-    ta.select(); document.execCommand('copy');
-    document.body.removeChild(ta);
-    const toast = document.getElementById('share-toast');
-    toast.classList.add('show');
-    setTimeout(() => toast.classList.remove('show'), 2000);
+  const card = document.getElementById('result-card');
+  // 使用 html2canvas 截图
+  if (typeof html2canvas === 'undefined') {
+    // 动态加载 html2canvas
+    const script = document.createElement('script');
+    script.src = 'https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js';
+    script.onload = () => captureAndShare(card);
+    document.head.appendChild(script);
+  } else {
+    captureAndShare(card);
+  }
+}
+
+function captureAndShare(element) {
+  html2canvas(element, {
+    backgroundColor: '#000',
+    scale: 2,
+    useCORS: true
+  }).then(canvas => {
+    // 转为图片并弹出保存
+    const link = document.createElement('a');
+    link.download = 'brand-mind-result.png';
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+  }).catch(err => {
+    console.warn('Screenshot failed:', err);
+    alert('截图失败，请长按屏幕截图保存');
   });
 }
 
