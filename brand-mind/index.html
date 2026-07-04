@@ -1405,7 +1405,7 @@ function showSharePreview() {
   const img = document.getElementById('result-img');
   
   const W = 750, H = 1334;
-  const canvas = document.getElementById('share-canvas');
+  const canvas = document.createElement('canvas');
   canvas.width = W; canvas.height = H;
   const ctx = canvas.getContext('2d');
   
