@@ -374,12 +374,23 @@ h3 { font-size: 1.1rem; color: #E8E0D8; margin-bottom: 12px; }
   cursor: pointer; z-index: 10;
 }
 .share-back:hover { color: #FF0000; }
-#share-canvas {
-  max-width: 100%; max-height: 70vh;
+#share-preview-img {
+  max-width: 90%; max-height: 72vh;
   border: 1px solid #222;
   border-radius: 4px;
 }
-#save-share-btn { margin-top: 24px; }
+.share-hint {
+  margin-top: 16px;
+  font-size: 0.8rem; color: #666;
+  letter-spacing: 0.1em;
+  font-family: "Courier New", monospace;
+}
+.mobile-only { display: block; }
+.desktop-only { display: none; }
+@media (min-width: 768px) {
+  .mobile-only { display: none; }
+  .desktop-only { display: block; }
+}
 
 /* ===== DEEPER SCREEN ===== */
 #deeper-screen {
@@ -537,8 +548,9 @@ h3 { font-size: 1.1rem; color: #E8E0D8; margin-bottom: 12px; }
   <!-- SHARE PREVIEW -->
   <div class="screen" id="share-screen">
     <div class="share-back" onclick="showScreen('result-screen')">←</div>
-    <canvas id="share-canvas"></canvas>
-    <button class="btn" id="save-share-btn" onclick="saveShareImage()">保存图片</button>
+    <img id="share-preview-img" src="" alt="长按保存">
+    <div class="share-hint mobile-only">长按图片即可保存到手机相册</div>
+    <div class="share-hint desktop-only">右键图片 → 另存为</div>
   </div>
 
   <!-- DEEPER -->
@@ -1456,21 +1468,19 @@ function showSharePreview() {
   qrImg.onload = function() {
     const qrSize = 100;
     ctx.drawImage(qrImg, (W - qrSize)/2, H - 120, qrSize, qrSize);
-    // 跳转到预览页
-    showScreen('share-screen');
+    finishShareImage(canvas);
   };
   qrImg.onerror = function() {
-    showScreen('share-screen');
+    finishShareImage(canvas);
   };
   qrImg.src = './img/qrcode-site.png';
 }
 
-function saveShareImage() {
-  const canvas = document.getElementById('share-canvas');
-  const link = document.createElement('a');
-  link.download = 'brand-mind-result.png';
-  link.href = canvas.toDataURL('image/png');
-  link.click();
+function finishShareImage(canvas) {
+  // 转为图片显示在页面上，用户长按可保存
+  const dataUrl = canvas.toDataURL('image/png');
+  document.getElementById('share-preview-img').src = dataUrl;
+  showScreen('share-screen');
 }
 
 // ===== DATA SUBMISSION (直连飞书) =====
