@@ -1489,22 +1489,30 @@ function finishShareImage(canvas) {
 // ===== DATA SUBMISSION (直连飞书) =====
 async function submitToFeishu(archetypeName) {
   const WORKER_URL = 'https://feishu-proxy.felix149.workers.dev';
+  const payload = {
+    userName: state.userName,
+    answers: state.answers,
+    archetype: archetypeName,
+    scores: state.scores
+  };
+  console.log('[FEISHU] Submitting to Worker:', WORKER_URL, JSON.stringify(payload).substring(0,100));
   
   try {
     const resp = await fetch(WORKER_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        userName: state.userName,
-        answers: state.answers,
-        archetype: archetypeName,
-        scores: state.scores
-      })
+      body: JSON.stringify(payload)
     });
     const result = await resp.json();
     console.log('[FEISHU] Record saved:', result.success ? 'SUCCESS' : result.msg);
   } catch (err) {
-    console.warn('[FEISHU] Submit failed (non-blocking):', err.message);
+    console.warn('[FEISHU] Submit failed:', err.message);
+    // Fallback: 存到 localStorage 以防丢失
+    try {
+      const saved = JSON.parse(localStorage.getItem('feishu_pending') || '[]');
+      saved.push({...payload, time: Date.now()});
+      localStorage.setItem('feishu_pending', JSON.stringify(saved));
+    } catch(e) {}
   }
 }
 
