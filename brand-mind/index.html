@@ -72,13 +72,26 @@ h3 { font-size: 1.1rem; color: #E8E0D8; margin-bottom: 12px; }
 
 /* ===== COVER SCREEN ===== */
 #cover-screen {
-  justify-content: center; align-items: center;
+  justify-content: flex-end; align-items: center;
   text-align: center; position: relative;
+  padding: 0; min-height: 100vh;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 #cover-screen .cover-img {
-  width: 100%; max-width: 380px; height: auto;
-  margin-bottom: 40px;
-  opacity: 0.9;
+  position: absolute; top: 0; left: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+#cover-screen .cover-overlay {
+  position: relative; z-index: 1;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: flex-end;
+  padding-bottom: 80px; width: 100%; height: 100%;
+  position: absolute; top: 0; left: 0;
+  background: linear-gradient(to bottom, transparent 40%, rgba(0,0,0,0.7) 100%);
 }
 
 /* ===== BUTTONS ===== */
@@ -374,10 +387,12 @@ h3 { font-size: 1.1rem; color: #E8E0D8; margin-bottom: 12px; }
   <!-- COVER -->
   <div class="screen active" id="cover-screen">
     <img class="cover-img" src="./img/cover.jpg" alt="Brand Mind">
-    <div class="title-brand">BRAND MIND</div>
-    <div class="title-cn">品牌心智标本馆</div>
-    <div class="subtitle">— 收藏的不是品牌，是创造品牌的人 —</div>
-    <button class="btn" onclick="startTest()">进 入</button>
+    <div class="cover-overlay">
+      <div class="title-brand">BRAND MIND</div>
+      <div class="title-cn">品牌心智标本馆</div>
+      <div class="subtitle">— 收藏的不是品牌，是创造品牌的人 —</div>
+      <button class="btn" onclick="startTest()">进 入</button>
+    </div>
   </div>
 
   <!-- NAME INPUT -->
