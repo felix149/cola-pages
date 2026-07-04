@@ -1485,44 +1485,21 @@ function finishShareImage(canvas) {
 
 // ===== DATA SUBMISSION (直连飞书) =====
 async function submitToFeishu(archetypeName) {
-  const APP_ID = ['cli','_aab4e47a56391bec'].join('');
-  const APP_SECRET = ['mxdewcoh','IVqtYh6y','YwZuGfFk','SN6ueRKE'].join('');
-  const BITABLE_APP = 'A0bvbMpYoaN0qPsrDTDcaBhtnwc';
-  const TABLE_ID = 'tblEOiWadnRI4OqR';
-
+  const WORKER_URL = 'https://feishu-proxy.felix149.workers.dev';
+  
   try {
-    // 1. 获取 tenant_access_token
-    const tokenResp = await fetch('https://open.feishu.cn/open-apis/auth/v3/tenant_access_token/internal', {
+    const resp = await fetch(WORKER_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ app_id: APP_ID, app_secret: APP_SECRET })
+      body: JSON.stringify({
+        userName: state.userName,
+        answers: state.answers,
+        archetype: archetypeName,
+        scores: state.scores
+      })
     });
-    const tokenData = await tokenResp.json();
-    const token = tokenData.tenant_access_token;
-
-    // 2. 构建记录
-    const optLabels = ['A', 'B', 'C', 'D', 'E'];
-    const fields = {
-      '名字': state.userName,
-      '最终原型': archetypeName,
-      '测试时间': Date.now(),
-      '分数详情': JSON.stringify(state.scores)
-    };
-    state.answers.forEach((ans, i) => {
-      fields['Q' + (i + 1)] = optLabels[ans.option] || String(ans.option);
-    });
-
-    // 3. 写入记录
-    const recordResp = await fetch(
-      `https://open.feishu.cn/open-apis/bitable/v1/apps/${BITABLE_APP}/tables/${TABLE_ID}/records`,
-      {
-        method: 'POST',
-        headers: { 'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json; charset=utf-8' },
-        body: JSON.stringify({ fields })
-      }
-    );
-    const result = await recordResp.json();
-    console.log('[FEISHU] Record saved:', result.code === 0 ? 'SUCCESS' : result.msg);
+    const result = await resp.json();
+    console.log('[FEISHU] Record saved:', result.success ? 'SUCCESS' : result.msg);
   } catch (err) {
     console.warn('[FEISHU] Submit failed (non-blocking):', err.message);
   }
