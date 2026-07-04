@@ -1496,34 +1496,49 @@ async function submitToFeishu(archetypeName) {
     scores: state.scores
   };
   
-  // 方法1: sendBeacon（微信兼容性最好）
-  try {
-    const blob = new Blob([JSON.stringify(payload)], {type: 'application/json'});
-    const sent = navigator.sendBeacon(WORKER_URL, blob);
-    if (sent) { console.log('[FEISHU] Beacon sent'); return; }
-  } catch(e) {}
+  // 调试: 在页面上显示提交状态
+  const debugEl = document.createElement('div');
+  debugEl.style.cssText = 'position:fixed;bottom:10px;left:10px;right:10px;background:#222;color:#0f0;font-size:12px;padding:8px;border-radius:4px;z-index:99999;font-family:monospace;max-height:150px;overflow:auto;';
+  debugEl.textContent = '[DEBUG] 开始提交...';
+  document.body.appendChild(debugEl);
   
-  // 方法2: fetch
+  // 方法1: fetch
   try {
+    debugEl.textContent = '[DEBUG] fetch -> ' + WORKER_URL;
     const resp = await fetch(WORKER_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)
     });
     const result = await resp.json();
-    console.log('[FEISHU] Record saved:', result.success ? 'SUCCESS' : result.msg);
+    debugEl.textContent = '[DEBUG] ✅ ' + JSON.stringify(result);
+    debugEl.style.color = '#0f0';
+    return;
   } catch (err) {
-    console.warn('[FEISHU] fetch failed, trying XHR...', err.message);
-    // 方法3: XMLHttpRequest（某些旧版微信浏览器支持这个但不支持 fetch）
-    try {
-      const xhr = new XMLHttpRequest();
-      xhr.open('POST', WORKER_URL, true);
-      xhr.setRequestHeader('Content-Type', 'application/json');
-      xhr.send(JSON.stringify(payload));
-      console.log('[FEISHU] XHR sent');
-    } catch(e2) {
-      console.warn('[FEISHU] All methods failed');
-    }
+    debugEl.textContent = '[DEBUG] fetch失败: ' + err.message + ', 尝试beacon...';
+  }
+  
+  // 方法2: sendBeacon
+  try {
+    const blob = new Blob([JSON.stringify(payload)], {type: 'text/plain'});
+    const sent = navigator.sendBeacon(WORKER_URL, blob);
+    debugEl.textContent = '[DEBUG] beacon: ' + (sent ? '✅已发送' : '❌失败');
+    if (sent) return;
+  } catch(e) {
+    debugEl.textContent += ' | beacon异常:' + e.message;
+  }
+  
+  // 方法3: XHR
+  try {
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', WORKER_URL, true);
+    xhr.setRequestHeader('Content-Type', 'text/plain');
+    xhr.onload = function() { debugEl.textContent = '[DEBUG] XHR: ' + xhr.status + ' ' + xhr.responseText; };
+    xhr.onerror = function() { debugEl.textContent = '[DEBUG] XHR失败'; debugEl.style.color = '#f00'; };
+    xhr.send(JSON.stringify(payload));
+  } catch(e2) {
+    debugEl.textContent = '[DEBUG] 全部失败: ' + e2.message;
+    debugEl.style.color = '#f00';
   }
 }
 
